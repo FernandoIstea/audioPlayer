@@ -35,6 +35,13 @@ function configurarMediaSession(song) {
     navigator.mediaSession.metadata = new MediaMetadata(song)
 }
 
+function activarBloqueo() {
+    if ('wakeLock' in navigator) {
+        navigator.wakeLock.request('screen')
+        .then(()=> console.log('Se bloqueó la pantalla.'))
+    }
+}
+
 function agregarEventoClickPlayList() {
     const listaCanciones = document.querySelectorAll("p[data-songname]")
     
@@ -45,6 +52,7 @@ function agregarEventoClickPlayList() {
                 audioPlayer.src = cancionSeleccionada.source
                 imgCover.src = cancionSeleccionada.artwork[0].src
                 audioPlayer.play()
+                activarBloqueo()
                 configurarMediaSession(cancionSeleccionada)
             })
         })
