@@ -2,7 +2,7 @@
     "name": "Istea Music Player",
     "short_name": "IsteaPlayer",
     "description": "Aplicación PWA de reproducción de música.",
-    "start_url": "./index.html",
+    "start_url": "/audioPlayer/",
     "scope": "/audioPlayer/",
     "display": "standalone",
     "background_color": "#606c76",
