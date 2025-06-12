@@ -35,13 +35,6 @@ function configurarMediaSession(song) {
     navigator.mediaSession.metadata = new MediaMetadata(song)
 }
 
-function activarBloqueo() {
-    if ('wakeLock' in navigator) {
-        navigator.wakeLock.request('screen')
-        .then(()=> console.log('Se bloqueó la pantalla.'))
-    }
-}
-
 function agregarEventoClickPlayList() {
     const listaCanciones = document.querySelectorAll("p[data-songname]")
     
@@ -51,9 +44,9 @@ function agregarEventoClickPlayList() {
                 let cancionSeleccionada = playList.find((song)=> song.source === pCancion.dataset.songname )
                 audioPlayer.src = cancionSeleccionada.source
                 imgCover.src = cancionSeleccionada.artwork[0].src
-                audioPlayer.play()
-                activarBloqueo()
                 configurarMediaSession(cancionSeleccionada)
+                index = parseInt(pCancion.id)
+                audioPlayer.play()
             })
         })
     }
@@ -74,11 +67,32 @@ audioPlayer.addEventListener("pause", ()=> imgVumeter.src = vumeterImages[1])
 audioPlayer.addEventListener("timeupdate", ()=> progressBar.style.width = `${mostrarProgresoDeCancion() * 4}px` )
 
 audioPlayer.addEventListener("ended", ()=> {
-    imgVumeter.src = vumeterImages[1]
     progressBar.style.width = '0px'
+    imgVumeter.src = vumeterImages[1]
     playButton.src = playingButtons[0]
+
+    index++ // incremento index en 1 dígito
+    if (index > playList.length) {
+        index = 1
+    }
+
+    const cancionSiguiente = document.querySelector(`p[id="${index}"]`)
+    cancionSiguiente.scrollIntoView({behavior: 'smooth', block: 'start'})
+    cancionSiguiente.click()
 })
 
 playButton.addEventListener("click", ()=> {
-    
+    if (audioPlayer.src === location.href) {
+        console.error("Selecciona un archivo de audio para reproducir.")
+        return 
+    }
+
+    if (audioPlayer.paused) {
+        audioPlayer.play()
+        playButton.src = playingButtons[1]
+    } else {
+        audioPlayer.pause()
+        playButton.src = playingButtons[0]
+    }
+
 })
