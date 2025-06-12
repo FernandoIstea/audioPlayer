@@ -47,6 +47,7 @@ function agregarEventoClickPlayList() {
                 configurarMediaSession(cancionSeleccionada)
                 index = parseInt(pCancion.id)
                 audioPlayer.play()
+                navigator.wakeLock.request('screen')
             })
         })
     }
@@ -70,6 +71,7 @@ audioPlayer.addEventListener("ended", ()=> {
     progressBar.style.width = '0px'
     imgVumeter.src = vumeterImages[1]
     playButton.src = playingButtons[0]
+    navigator.wakeLock.release()
 
     index++ // incremento index en 1 dígito
     if (index > playList.length) {
@@ -89,10 +91,11 @@ playButton.addEventListener("click", ()=> {
 
     if (audioPlayer.paused) {
         audioPlayer.play()
+        navigator.wakeLock.request('screen')
         playButton.src = playingButtons[1]
     } else {
         audioPlayer.pause()
+        navigator.wakeLock.release()
         playButton.src = playingButtons[0]
     }
-
 })
