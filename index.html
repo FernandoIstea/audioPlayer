@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Media Session API</title>
+    <meta name="theme-color" content="#606c76">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./icons/music-64.png" type="image/png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/playlist.js"></script>
+    <script defer src="js/media.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Audio Player</h1>
+        <img src="images/musical-notes.png" alt="Audio Player Icon">
+    </header>
+    <main>
+        <img id="cover" src="images/audio-file.png" alt="Song Cover">
+        <div class="vumeter">
+            <p>VUMETER</p>
+            <img id="vumeter" src="images/vumeter-off.gif">
+        </div>
+
+        <div class="playlist">
+            <!-- <p id="" data-songname="">Artista - Canción</p> -->
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </main>
+    
+
+    <footer class="player">
+        <img id="frew" src="images/frew.png" alt="Rewind">
+        <img id="play" src="images/play.png" alt="Play">
+        <img id="ffwd" src="images/ffwd.png" alt="Fast Forward">
+    </footer>
+</body>
+
+</html>
